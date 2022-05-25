@@ -16,6 +16,10 @@ function check_user_affiliatewp_member() {
 		if( $current_user->roles[0] !== 'affiliatewp_member' ) {
 			echo '<style>.woocommerce-MyAccount-navigation-link--affiliate-area, .affiliate-area-link{display:none;}</style>';
 		}
+		if($current_user->roles[0] !== 'affiliatewp_member' && $_SERVER['REQUEST_URI'] == '/affiliatewp/'){
+			header("Location:".'https://'.$_SERVER['HTTP_HOST'].'/my-account/'); 
+			exit;
+		}
 }
 add_action( 'init', 'check_user_affiliatewp_member' );
 
